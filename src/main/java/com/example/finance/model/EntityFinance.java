@@ -3,14 +3,14 @@ package com.example.finance.model;
 public class EntityFinance {
 
     private Long id;
-    private double initialMoney;
+    private String initialMoney;
     private double income;
 
     public EntityFinance() {
 
     }
 
-    public EntityFinance(Long id, double initialMoney) {
+    public EntityFinance(Long id, String initialMoney) {
         this.id = id;
         this.initialMoney = initialMoney;
         this.income = income;
@@ -24,11 +24,11 @@ public class EntityFinance {
         this.id = id;
     }
 
-    public double getInitialMoney() {
+    public String getInitialMoney() {
         return initialMoney;
     }
 
-    public void setInitialMoney(double initialMoney) {
+    public void setInitialMoney(String initialMoney) {
         this.initialMoney = initialMoney;
     }
 
