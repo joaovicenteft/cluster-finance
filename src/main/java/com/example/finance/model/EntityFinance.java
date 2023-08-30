@@ -1,19 +1,23 @@
 package com.example.finance.model;
 
+import java.util.List;
+
 public class EntityFinance {
 
     private Long id;
-    private String initialMoney;
-    private double income;
+    private List<String> values;
 
-    public EntityFinance() {
-
+    public List<String> getValues() {
+        return values;
     }
 
-    public EntityFinance(Long id, String initialMoney) {
+    public void setValues(List<String> values) {
+        this.values = values;
+    }
+
+    public EntityFinance(Long id, List<String> values) {
         this.id = id;
-        this.initialMoney = initialMoney;
-        this.income = income;
+        this.values = values;
     }
 
     public Long getId() {
@@ -24,19 +28,4 @@ public class EntityFinance {
         this.id = id;
     }
 
-    public String getInitialMoney() {
-        return initialMoney;
-    }
-
-    public void setInitialMoney(String initialMoney) {
-        this.initialMoney = initialMoney;
-    }
-
-    public double getIncome() {
-        return income;
-    }
-
-    public void setIncome(double income) {
-        this.income = income;
-    }
 }

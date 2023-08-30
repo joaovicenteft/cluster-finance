@@ -15,22 +15,23 @@ import java.util.Map;
 @RequestMapping("/finance")
 public class FinanceController {
 
-    private final Map<Long, String> financeMap = new HashMap<>();
+    private final Map<Long, List<String>> financeMap = new HashMap<>();
     private long idCounter = 1;
 
     @GetMapping
     public ResponseEntity<List<EntityFinance>> getAllFinance() {
         List<EntityFinance> entityFinance = new ArrayList<>();
 
-        for (Map.Entry<Long, String> entry : financeMap.entrySet()) {
-            entityFinance.add(new EntityFinance(entry.getKey(), entry.getValue()));
+        for (Map.Entry<Long, List<String>> entry : financeMap.entrySet()) {
+            List <String> value = entry.getValue();
+            entityFinance.add(new EntityFinance(entry.getKey(), value));
         }
         return ResponseEntity.ok(entityFinance);
     }
     
     @GetMapping("/{id}")
     public ResponseEntity<EntityFinance> getFinanceById(@PathVariable Long id) {
-        String message = financeMap.get(id);
+        List<String> message = financeMap.get(id);
 
         if (message != null) {
             return ResponseEntity.ok(new EntityFinance(id,message));
@@ -40,7 +41,7 @@ public class FinanceController {
 
     @PostMapping
     public ResponseEntity<EntityFinance> createFinance(@RequestBody EntityFinance entityfinance) {
-        financeMap.put(idCounter, entityfinance.getInitialMoney());
+        financeMap.put(idCounter, entityfinance.getValues());
         entityfinance.setId(idCounter);
         idCounter++;
         return ResponseEntity.ok(entityfinance);
@@ -49,8 +50,8 @@ public class FinanceController {
     @PutMapping("/{id}")
     public ResponseEntity<EntityFinance> updateFinance(@PathVariable Long id, @RequestBody EntityFinance entityfinance) {
         if (financeMap.containsKey(id)) {
-            financeMap.put(id, entityfinance.getInitialMoney());
-            return ResponseEntity.ok(new EntityFinance(id, entityfinance.getInitialMoney()));
+            financeMap.put(id, entityfinance.getValues());
+            return ResponseEntity.ok(new EntityFinance(id, entityfinance.getValues()));
         }
         return ResponseEntity.notFound().build();
     }
