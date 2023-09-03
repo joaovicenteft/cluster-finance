@@ -1,7 +1,8 @@
 FROM openjdk:17
+#FROM openjdk:11
 
-COPY ./out/production/classes/com/example/finance /tmp
-WORKDIR /tmp
-# Expose the port that your application runs on
+COPY build/libs/finance-0.0.1-SNAPSHOT.jar app.jar
+
 EXPOSE 8080
-ENTRYPOINT ["java","FinanceApplication"]
+
+ENTRYPOINT ["java", "-jar", "/app.jar"]
