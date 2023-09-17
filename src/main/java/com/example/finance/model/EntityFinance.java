@@ -19,10 +19,13 @@ public class EntityFinance {
         super();
     }
 
-    public EntityFinance(Long id, int timeMonth) {
+    public EntityFinance(Long id, int timeMonth, double inflationMean) {
         this.id = id;
         //this.values = values;
         this.timeMonth = timeMonth;
+        this.inflationMean = inflationMean;
+        //this.rescisionMoney = rescisionMoney;
+        //this.liquidMoney = liquidMoney;
     }
 
     public int getTimeMonth() {
