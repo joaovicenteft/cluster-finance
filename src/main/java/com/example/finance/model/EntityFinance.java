@@ -4,7 +4,10 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
-
+//{
+//        "timeMonth": 1,
+//        "inflationMean": 6.63
+//}
 public class EntityFinance {
 
     private Long id;
@@ -19,11 +22,12 @@ public class EntityFinance {
         super();
     }
 
-    public EntityFinance(Long id, int timeMonth, double inflationMean) {
+    public EntityFinance(Long id, int timeMonth, double inflationMean, double fullMoney) {
         this.id = id;
         //this.values = values;
         this.timeMonth = timeMonth;
         this.inflationMean = inflationMean;
+        this.fullMoney = fullMoney;
         //this.rescisionMoney = rescisionMoney;
         //this.liquidMoney = liquidMoney;
     }

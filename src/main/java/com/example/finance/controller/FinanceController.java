@@ -23,7 +23,7 @@ public class FinanceController {
         System.out.println(financeList);
         for (DataEntry entry : financeList) {
             entityFinance.add(new EntityFinance(Long.parseLong(entry.getValues(0)), Integer.parseInt(entry.getValues(1)),
-                    Double.parseDouble(entry.getValues(2))));
+                    Double.parseDouble(entry.getValues(2)), Double.parseDouble(entry.getValues(3))));
         }
 
         return ResponseEntity.ok(entityFinance);
@@ -37,6 +37,7 @@ public class FinanceController {
         String id_financeList = null;
         String timeMonth = null;
         String inflationMean = null;
+        String fullMoney = null;
 
         for (int i = 0; i < financeList.size(); i++) {
             //System.out.println(financeList.get(i).getValues(0));
@@ -45,12 +46,14 @@ public class FinanceController {
                 id_financeList = financeList.get(i).getValues(0); // equivalent to take position id with index
                 timeMonth = financeList.get(i).getValues(1); // values
                 inflationMean = financeList.get(i).getValues(2); // more values
+                fullMoney = financeList.get(i).getValues(3);
             }
         }
         
 
         if (timeMonth != null) {
-            return ResponseEntity.ok(new EntityFinance(Long.parseLong(id_financeList), Integer.parseInt(timeMonth), Double.parseDouble(inflationMean)));
+            return ResponseEntity.ok(new EntityFinance(Long.parseLong(id_financeList), Integer.parseInt(timeMonth)
+                    , Double.parseDouble(inflationMean), Double.parseDouble(fullMoney)));
         }
         return ResponseEntity.notFound().build();
     }
@@ -60,7 +63,8 @@ public class FinanceController {
     public ResponseEntity<EntityFinance> createFinance(@RequestBody EntityFinance entityfinance) {
         //List<String> values = Arrays.asList(entityfinance.getValues(), entityfinance.getTimeMonth());
         //financeMap.put(idCounter, values);
-        financeList.add(new DataEntry(String.valueOf(idCounter), String.valueOf(entityfinance.getTimeMonth()), String.valueOf(entityfinance.getInflationMean())));
+        financeList.add(new DataEntry(String.valueOf(idCounter),
+                String.valueOf(entityfinance.getTimeMonth()), String.valueOf(entityfinance.getInflationMean()), String.valueOf(entityfinance.getFullMoney())));
         entityfinance.setId(idCounter);
         idCounter++;
         return ResponseEntity.ok(entityfinance);
@@ -70,7 +74,7 @@ public class FinanceController {
     public ResponseEntity<EntityFinance> updateFinance(@PathVariable Long id, @RequestBody EntityFinance entityfinance) {
         if (financeList.get(id.intValue()) != null) {
             financeList.get(id.intValue()).putValues(id.intValue(), String.valueOf(entityfinance.getTimeMonth()));
-            return ResponseEntity.ok(new EntityFinance(id, entityfinance.getTimeMonth(), entityfinance.getInflationMean()));
+            return ResponseEntity.ok(new EntityFinance(id, entityfinance.getTimeMonth(), entityfinance.getInflationMean(), entityfinance.getFullMoney()));
         }
         return ResponseEntity.notFound().build();
     }
