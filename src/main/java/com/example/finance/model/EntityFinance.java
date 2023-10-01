@@ -1,13 +1,15 @@
 package com.example.finance.model;
-
+import org.springframework.data.redis.core.RedisHash;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 //{
 //        "timeMonth": 1,
 //        "inflationMean": 6.63
 //}
+@RedisHash("finance")
 public class EntityFinance {
 
     private Long id;

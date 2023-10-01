@@ -2,7 +2,9 @@ package com.example.finance.controller;
 
 import com.example.finance.model.DataEntry;
 import com.example.finance.model.EntityFinance;
+import com.example.finance.model.financeRepository;
 import org.apache.coyote.Response;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +14,9 @@ import java.util.*;
 @RestController
 @RequestMapping("/finance")
 public class FinanceController {
+
+    @Autowired
+    private financeRepository financerepo;
 
     private final Map<Long, List<String>> financeMap = new HashMap<>();
     private final List<DataEntry> financeList = new ArrayList<>();
@@ -55,6 +60,16 @@ public class FinanceController {
             return ResponseEntity.ok(new EntityFinance(Long.parseLong(id_financeList), Integer.parseInt(timeMonth)
                     , Double.parseDouble(inflationMean), Double.parseDouble(fullMoney)));
         }
+        String strid = String.valueOf(id);
+        List<String> stringList = new ArrayList<>();
+
+        for (int i = 0; i < strid.length(); i++) {
+            stringList.add(Character.toString(strid.charAt(i)));
+        }
+
+        Iterable<String> stringIterable = stringList;
+
+        financerepo.findAllById(stringIterable);
         return ResponseEntity.notFound().build();
     }
 
@@ -67,6 +82,7 @@ public class FinanceController {
                 String.valueOf(entityfinance.getTimeMonth()), String.valueOf(entityfinance.getInflationMean()), String.valueOf(entityfinance.getFullMoney())));
         entityfinance.setId(idCounter);
         idCounter++;
+        financerepo.save(entityfinance);
         return ResponseEntity.ok(entityfinance);
     }
 
