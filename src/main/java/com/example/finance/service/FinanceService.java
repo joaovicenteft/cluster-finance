@@ -2,13 +2,11 @@ package com.example.finance.service;
 
 import com.example.finance.model.DataEntry;
 import com.example.finance.model.EntityFinance;
-import com.example.finance.model.financeRepository;
+import com.example.finance.repository.FinanceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -16,7 +14,7 @@ import java.util.List;
 public class FinanceService {
 
     @Autowired
-    financeRepository financeRepo;
+    FinanceRepository financeRepo;
 
     public List<EntityFinance> findAll(List<DataEntry> financeList, List<EntityFinance> entityFinance) {
         for (DataEntry entry : financeList) {

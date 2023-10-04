@@ -2,15 +2,11 @@ package com.example.finance.controller;
 
 import com.example.finance.model.DataEntry;
 import com.example.finance.model.EntityFinance;
-import com.example.finance.model.financeRepository;
 import com.example.finance.service.FinanceService;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.text.html.parser.Entity;
-import java.sql.Array;
 import java.util.*;
 
 @RestController
