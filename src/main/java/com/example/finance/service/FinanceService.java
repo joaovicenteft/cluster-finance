@@ -77,8 +77,8 @@ public class FinanceService {
                 String.valueOf(entityfinance.getTimeMonth()), String.valueOf(entityfinance.getInflationMean()), String.valueOf(entityfinance.getFullMoney())));
         entityfinance.setId(idCounter);
 
+        //financeRepo.save(entityfinance);
         return entityfinance;
-        //financerepo.save(entityfinance);
     }
 
     public int deleteData(List<DataEntry> financeList, Long id) {
